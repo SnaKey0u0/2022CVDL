@@ -58,12 +58,13 @@ def show_result():
         print("You stupid, choose a folder")
 
 
-def show_words_on_board(todo):
-    Q2.show_words_on_board(todo)
+def show_words_on_board():
+    text = ui.txt_2.text()
+    Q2.show_words_on_board(folder_path, text)
 
-
-def show_words_vertically(todo):
-    Q2.show_words_on_board(todo)
+def show_words_vertically():
+    text = ui.txt_2.text()
+    Q2.show_words_on_board(folder_path, text)
 
 
 def stereo_disparity_map(todo):
@@ -87,8 +88,8 @@ if __name__ == "__main__":
     ui.btn_extrinsic.clicked.connect(lambda: find_extrinsic())
     ui.btn_distortion.clicked.connect(lambda: find_distortion())
     ui.btn_result1.clicked.connect(lambda: show_result())
-    ui.btn_show_board.clicked.connect(lambda: show_words_on_board('show_words_on_board'))
-    ui.btn_show_vertical.clicked.connect(lambda: show_words_vertically('show_words_vertically'))
+    ui.btn_show_board.clicked.connect(lambda: show_words_on_board())
+    ui.btn_show_vertical.clicked.connect(lambda: show_words_vertically())
     ui.btn_show_disparity_map.clicked.connect(lambda: stereo_disparity_map('stereo_disparity_map'))
     ui.btn_check_disparity_value.clicked.connect(lambda: check_disparity_value('check_disparity_value'))
     MainWindow.show()  # 顯示元件
