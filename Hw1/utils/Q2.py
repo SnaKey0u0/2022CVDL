@@ -4,7 +4,7 @@ from os import listdir
 from os.path import isfile, join
 
 
-def show_words_on_board(folder_path, text, magic_txt='img\Q2_Image\Q2_lib\alphabet_lib_onboard.txt'):
+def show_words_on_board(folder_path, text, magic_txt='img\\Q2_Image\\Q2_lib\\alphabet_lib_onboard.txt'):
     text = text.upper()
     objp = np.zeros((8*11, 3), np.float32)
     objp[:, :2] = np.mgrid[0:11, 0:8].T.reshape(-1, 2)
@@ -22,12 +22,14 @@ def show_words_on_board(folder_path, text, magic_txt='img\Q2_Image\Q2_lib\alphab
             imgpoints.append(corners)
             ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, gray.shape[::-1], None, None)
             for i, (char, bias) in enumerate(
-                zip(text, [[7, 5, 0],
-                           [4, 5, 0],
-                    [1, 5, 0],
-                    [7, 2, 0],
-                    [4, 2, 0],
-                    [1, 2, 0]])):
+                    zip(text,
+                        [[7, 5, 0],
+                         [4, 5, 0],
+                         [1, 5, 0],
+                         [7, 2, 0],
+                         [4, 2, 0],
+                         [1, 2, 0]]
+                        )):
                 # print(i, char, bias)
 
                 fs = cv2.FileStorage(magic_txt, cv2.FILE_STORAGE_READ)
@@ -44,6 +46,7 @@ def show_words_on_board(folder_path, text, magic_txt='img\Q2_Image\Q2_lib\alphab
                         (0, 0, 255),
                         3)
 
+            img = cv2.resize(img, (500, 500))  # 為了呈現方便，可刪
             cv2.imshow('img', img)
             cv2.waitKey(500)
 
@@ -51,4 +54,4 @@ def show_words_on_board(folder_path, text, magic_txt='img\Q2_Image\Q2_lib\alphab
 
 
 def show_words_vertically(folder_path, text):
-    show_words_on_board(folder_path, text, magic_txt="img\Q2_Image\Q2_lib\alphabet_lib_vertical.txt")
+    show_words_on_board(folder_path, text, magic_txt="img\\Q2_Image\\Q2_lib\\alphabet_lib_vertical.txt")
