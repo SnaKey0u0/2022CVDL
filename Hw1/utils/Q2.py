@@ -4,13 +4,12 @@ from os import listdir
 from os.path import isfile, join
 
 
-def show_words_on_board(folder_path, text, magic_txt='img\\Q2_Image\\Q2_lib\\alphabet_lib_onboard.txt'):
+def show_words_on_board(folder_path, text, magic_txt='./img/Q2_Image/Q2_lib/alphabet_lib_onboard.txt'):
     text = text.upper()
     objp = np.zeros((8*11, 3), np.float32)
     objp[:, :2] = np.mgrid[0:11, 0:8].T.reshape(-1, 2)
     calibration_fnames = [f for f in listdir(folder_path) if isfile(join(folder_path, f))]
     calibration_fnames = sorted(calibration_fnames, key=lambda x: int(x[:-4]))
-
     for fname in calibration_fnames:
         objpoints = []
         imgpoints = []
@@ -54,4 +53,4 @@ def show_words_on_board(folder_path, text, magic_txt='img\\Q2_Image\\Q2_lib\\alp
 
 
 def show_words_vertically(folder_path, text):
-    show_words_on_board(folder_path, text, magic_txt="img\\Q2_Image\\Q2_lib\\alphabet_lib_vertical.txt")
+    show_words_on_board(folder_path, text, magic_txt="./img/Q2_Image/Q2_lib/alphabet_lib_vertical.txt")
