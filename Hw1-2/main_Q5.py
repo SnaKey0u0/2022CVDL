@@ -3,6 +3,10 @@ from myqt5_Q5 import Ui_MainWindow
 from utils import Q5
 import sys
 
+x_train = None 
+y_train = None
+x_test = None
+y_test = None
 img_path = None
 
 
@@ -12,11 +16,12 @@ def load_img():
 
 
 def show_train_img():
-    pass
+    global x_train, y_train, x_test, y_test
+    x_train, y_train, x_test, y_test = Q5.show_train_img()
 
 
 def show_model_structure():
-    pass
+    Q5.show_model_structure()
 
 
 def show_data_augmentation():
