@@ -18,7 +18,6 @@ def load_img2():
 
 
 def show_keypoints():
-    print(img1_path)
     Q4.show_keypoints(img1_path)
 
 
