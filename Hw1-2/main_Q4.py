@@ -1,6 +1,6 @@
 from PyQt5 import QtWidgets
-from my_qt5 import Ui_MainWindow
-from utils import Q4, Q5
+from myqt5_Q4 import Ui_MainWindow
+from utils import Q4
 import sys
 
 img1_path = None
