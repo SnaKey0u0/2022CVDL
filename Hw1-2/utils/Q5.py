@@ -4,12 +4,13 @@ import random
 import matplotlib.pyplot as plt
 import tensorflow as tf
 from PyQt5 import QtWidgets
-from torchvision import models
+from torchvision import models, transforms
 from torchsummary import summary
+from PIL import Image
 
 
 def load_img():
-    img_path = QtWidgets.QFileDialog.getOpenFileName()
+    img_path = QtWidgets.QFileDialog.getOpenFileName()[0]
     return img_path
 
 
@@ -17,7 +18,7 @@ def show_train_img():
     (x_train, y_train), (x_test, y_test) = tf.keras.datasets.cifar10.load_data()
     label_table = ("airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck")
     fig, axs = plt.subplots(3, 3)
-    axs[0, 0].imshow(x_train[0])
+    # axs[0, 0].imshow(x_train[0])
     for i in range(3):
         for j in range(3):
             idx = random.randint(0, len(x_train))
@@ -40,8 +41,30 @@ def show_model_structure():
     print(model_torch)
 
 
-def show_data_augmentation():
-    pass
+def show_data_augmentation(img_path):
+    augments = dict()
+    img = Image.open(img_path)
+
+    # random rotate
+    rotater = transforms.RandomRotation(degrees=(0, 180))
+    augments["random rotate"] = rotater(img)
+
+    # random resize
+    resize = transforms.RandomResizedCrop(size=(32, 32))
+    augments["random resize"] = resize(img)
+
+    # random horizont
+    hflipper = transforms.RandomHorizontalFlip(p=0.5)
+    augments["random horizont"] = hflipper(img)
+
+    fig, axs = plt.subplots(1, 3)
+    i = 0
+    for key in augments:
+        axs[i].imshow(augments[key])
+        axs[i].title.set_text(key)
+        axs[i].axis('off')
+        i += 1
+    plt.show()
 
 
 def show_acc_and_loss():
@@ -49,4 +72,5 @@ def show_acc_and_loss():
 
 
 def inference():
+    my_model = tf.keras.models.load_model('.utils/2022cvdl-vgg19.h5')
     pass
