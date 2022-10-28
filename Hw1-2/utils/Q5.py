@@ -9,6 +9,9 @@ from torchsummary import summary
 from PIL import Image
 
 
+my_vgg19 = tf.keras.models.load_model('/home/jacky/Desktop/CVDL2022/Hw1-2/utils/my_vgg19.h5')
+
+
 def load_img():
     img_path = QtWidgets.QFileDialog.getOpenFileName()[0]
     return img_path
@@ -71,6 +74,10 @@ def show_acc_and_loss():
     pass
 
 
-def inference():
-    my_model = tf.keras.models.load_model('.utils/2022cvdl-vgg19.h5')
-    pass
+def inference(img_path):
+    global my_vgg19
+    label_table = ("airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck")
+    img = cv2.imread(img_path)
+    img = cv2.resize(img, (32, 32))
+    label_idx = np.argmax(my_vgg19.predict(np.array([img])), axis=-1)
+    return label_table[label_idx[0]]

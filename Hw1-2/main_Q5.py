@@ -4,12 +4,13 @@ from myqt5_Q5 import Ui_MainWindow
 from utils import Q5
 import sys
 
-x_train = None 
+x_train = None
 y_train = None
 x_test = None
 y_test = None
 img_path = None
 loss_and_acc_path = "./imgs/loss&acc.png"
+
 
 def load_img(label):
     global img_path
@@ -36,8 +37,10 @@ def show_acc_and_loss(label):
     label.setPixmap(pixmap)
 
 
-def inference():
-    pass
+def inference(label):
+    predict = Q5.inference(img_path)
+    print(predict)
+    label.setText(predict)
 
 
 if __name__ == "__main__":
@@ -50,8 +53,9 @@ if __name__ == "__main__":
     ui.btn5_2.clicked.connect(lambda: show_model_structure())
     ui.btn5_3.clicked.connect(lambda: show_data_augmentation())
     ui.btn5_4.clicked.connect(lambda: show_acc_and_loss(ui.label))
-    ui.btn5_5.clicked.connect(lambda: inference())
+    ui.btn5_5.clicked.connect(lambda: inference(ui.label_2))
     ui.label.setScaledContents(True)
+    ui.label_2.setScaledContents(True)
 
     MainWindow.show()  # 顯示元件
     sys.exit(app.exec_())  # 視窗程式結束
