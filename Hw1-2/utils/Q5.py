@@ -79,5 +79,6 @@ def inference(img_path):
     label_table = ("airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck")
     img = cv2.imread(img_path)
     img = cv2.resize(img, (32, 32))
-    label_idx = np.argmax(my_vgg19.predict(np.array([img])), axis=-1)
-    return label_table[label_idx[0]]
+    output = my_vgg19.predict(np.array([img]))
+    label_idx = np.argmax(output, axis=-1)
+    return f"confidence: {format(output[0][label_idx[0]],'.2f')}\npredict: {label_table[label_idx[0]]}"
