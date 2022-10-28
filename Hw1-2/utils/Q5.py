@@ -9,7 +9,7 @@ from torchsummary import summary
 from PIL import Image
 
 
-my_vgg19 = tf.keras.models.load_model('/home/jacky/Desktop/CVDL2022/Hw1-2/utils/my_vgg19.h5')
+my_vgg19 = tf.keras.models.load_model('./utils/my_vgg19.h5')
 
 
 def load_img():
