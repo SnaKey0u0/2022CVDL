@@ -40,11 +40,12 @@ def background_subtraction():
 
 
 def preprocessing():
-    pass
+    global video_path
+    Q2.preprocessing(video_path)
 
 
 def video_tracking():
-    pass
+    Q2.video_tracking(video_path)
 
 
 def perspective_transform():
