@@ -49,7 +49,8 @@ def video_tracking():
 
 
 def perspective_transform():
-    pass
+    global img_path, video_path
+    Q3.perspective_transform(img_path, video_path)
 
 
 def image_reconstruction():
@@ -61,7 +62,6 @@ def compute_the_reconstruction_error():
 
 
 if __name__ == "__main__":
-    import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
