@@ -27,9 +27,9 @@ def perspective_transform(img_path, video_path):
 
         last = pts_dst
         pts_dst = [0 for i in range(4)]
-        count = 0 
+        count = 0
         for c, id in zip(corners, ids):
-            count+=1
+            count += 1
             try:
                 pts_dst[id[0]-1] = c[0][id[0]-1]
             except Exception as e:
@@ -47,14 +47,13 @@ def perspective_transform(img_path, video_path):
         # Calculate Homography
         img = cv2.imread(img_path)
         pts_src = np.array([[0, 0], [img.shape[1], 0], [img.shape[1], img.shape[0]], [0, img.shape[0]]])
-
         h, status = cv2.findHomography(pts_src, pts_dst)
 
         # Warp source image to destination based on homography
-        warped_image = cv2.warpPerspective(img, h, (frame.shape[1],frame.shape[0]))
+        warped_image = cv2.warpPerspective(img, h, (frame.shape[1], frame.shape[0]))
 
         # 疊圖
-        frame[warped_image>0]=warped_image[warped_image>0]
+        frame[warped_image > 0] = warped_image[warped_image > 0]
 
         # resize
         frame = cv2.resize(frame, (0, 0), fx=0.5, fy=0.5)

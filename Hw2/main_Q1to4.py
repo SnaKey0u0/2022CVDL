@@ -36,29 +36,37 @@ def load_folder(label):
 
 
 def background_subtraction():
-    pass
+    global video_path
+    if video_path != None and video_path != "":
+        Q1.background_subtraction()
 
 
 def preprocessing():
     global video_path
-    Q2.preprocessing(video_path)
+    if video_path != None and video_path != "":
+        Q2.preprocessing(video_path)
 
 
 def video_tracking():
-    Q2.video_tracking(video_path)
+    global video_path
+    if video_path != None and video_path != "":
+        Q2.video_tracking(video_path)
 
 
 def perspective_transform():
     global img_path, video_path
-    Q3.perspective_transform(img_path, video_path)
+    if video_path != None and video_path != "":
+        if img_path != None and img_path != "":
+            Q3.perspective_transform(img_path, video_path)
 
 
 def image_reconstruction():
-    pass
+    global folder_path
+    Q4.image_reconstruction(folder_path)
 
 
 def compute_the_reconstruction_error():
-    pass
+    Q4.compute_the_reconstruction_error()
 
 
 if __name__ == "__main__":
