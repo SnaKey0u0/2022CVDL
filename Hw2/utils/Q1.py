@@ -22,34 +22,37 @@ def background_subtraction(video_path="Dataset_CvDl_Hw2/Q1_Image/traffic.mp4"):
         if count <= 24:
             frame0to24.append(gray)
         else:
-            # mask = gmm_model.predict(gray.reshape(-1, 1))
-            # for i in range(len(mask)):
-            #     mask[i]=255
-            # mask = mask.reshape(288,352)
+            diff = cv2.absdiff(gray, mean)  # 處理溢位，不使用subtract
+            mask[diff > std*5] = 255
+            mask[diff <= std*5] = 0
 
-            means = max(gmm_model.means_)[0]
-
-            mask[gray-means > std*5] = 255
-            mask[gray-means <= std*5] = 0
-
-            # show frame
-            cv2.imshow("mask", mask)
-            if cv2.waitKey(1) == ord('q'):
-                break
+            mask = mask.astype(np.uint8)  # 轉成整數
+            mask = cv2.cvtColor(mask, cv2.COLOR_GRAY2BGR)  # 1 => 3 channel
+            seg = np.bitwise_and(frame, mask)  # masking
 
         count += 1
         if count == 25:
             frame0to24 = np.array(frame0to24)
             mean = np.mean(frame0to24, axis=0)
-            mean = mean.astype(dtype=np.uint8)
+            mean = mean.astype(dtype=np.uint8)  # 轉成整數
             std = np.std(frame0to24, axis=0)
             std[std < 5] = 5  # if standard deviation is less then 5, set to 5
-            gmm_model.fit(mean.reshape(-1, 1))
 
         # show frame
-        cv2.imshow('frame', gray)
+        cv2.imshow('frame', frame)
         if cv2.waitKey(1) == ord('q'):
             break
+
+        # show frame
+        cv2.imshow("mask", mask)
+        if cv2.waitKey(1) == ord('q'):
+            break
+
+        # show frame
+        cv2.imshow("seg", seg)
+        if cv2.waitKey(1) == ord('q'):
+            break
+
     cap.release()
     cv2.destroyAllWindows()
 
