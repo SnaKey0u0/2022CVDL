@@ -1,12 +1,10 @@
 import cv2
 import numpy as np
-from sklearn.mixture import GaussianMixture as GMM
 
 
 def background_subtraction(video_path="Dataset_CvDl_Hw2/Q1_Image/traffic.mp4"):
     count = 0
     cap = cv2.VideoCapture(video_path)
-    gmm_model = GMM(n_components=1, covariance_type='full')
     frame0to24 = list()
 
     while cap.isOpened():
