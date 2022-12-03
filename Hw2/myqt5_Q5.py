@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(206, 354)
+        MainWindow.resize(592, 359)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.groupBox = QtWidgets.QGroupBox(self.centralwidget)
@@ -38,6 +38,14 @@ class Ui_MainWindow(object):
         self.btn_inference = QtWidgets.QPushButton(self.groupBox)
         self.btn_inference.setGeometry(QtCore.QRect(20, 270, 151, 23))
         self.btn_inference.setObjectName("btn_inference")
+        self.img = QtWidgets.QLabel(self.centralwidget)
+        self.img.setGeometry(QtCore.QRect(260, 30, 281, 261))
+        self.img.setFrameShape(QtWidgets.QFrame.Box)
+        self.img.setText("")
+        self.img.setObjectName("img")
+        self.prediction = QtWidgets.QLabel(self.centralwidget)
+        self.prediction.setGeometry(QtCore.QRect(350, 300, 111, 16))
+        self.prediction.setObjectName("prediction")
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -56,6 +64,7 @@ class Ui_MainWindow(object):
         self.btn_show_model_structure.setText(_translate("MainWindow", "3. Show Model Structure"))
         self.btn_show_comparision.setText(_translate("MainWindow", "4. show Comparision"))
         self.btn_inference.setText(_translate("MainWindow", "5. Inference"))
+        self.prediction.setText(_translate("MainWindow", "Prediction: "))
 
 
 if __name__ == "__main__":
