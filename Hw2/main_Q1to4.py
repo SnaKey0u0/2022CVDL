@@ -38,7 +38,7 @@ def load_folder(label):
 def background_subtraction():
     global video_path
     if video_path != None and video_path != "":
-        Q1.background_subtraction()
+        Q1.background_subtraction(video_path)
 
 
 def preprocessing():
