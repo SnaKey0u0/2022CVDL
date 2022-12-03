@@ -51,6 +51,12 @@ def show_model_structure():
     resnet50 = ResNet50(weights='imagenet')
     dense = tf.keras.layers.Dense(1, activation='sigmoid')(resnet50.output)
     model = tf.keras.models.Model(inputs=resnet50.input, outputs=dense)
+    model.compile(
+        optimizer=tf.keras.optimizers.Adam(8e-5),
+        # loss=tfa.losses.SigmoidFocalCrossEntropy(alpha=0.4, gamma=1.0),
+        loss="binary_crossentropy",
+        metrics=["accuracy"],
+    )
     model.summary()
 
 
@@ -58,15 +64,16 @@ def show_comparision():
     resnet50 = ResNet50(weights='imagenet')
     dense = tf.keras.layers.Dense(1, activation='sigmoid')(resnet50.output)
     model = tf.keras.models.Model(inputs=resnet50.input, outputs=dense)
-
     model.compile(
         optimizer=tf.keras.optimizers.Adam(8e-5),
         # loss=tfa.losses.SigmoidFocalCrossEntropy(alpha=0.4, gamma=1.0),
         loss="binary_crossentropy",
         metrics=["accuracy"],
     )
-
-    model.summary()
+    # model.summary()
+    comparison = cv2.imread("comparison.png")
+    cv2.imshow("comparison", comparison)
+    cv2.waitKey(0)
 
 
 def inference(img_path):
